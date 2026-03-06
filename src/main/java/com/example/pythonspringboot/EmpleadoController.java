@@ -30,6 +30,14 @@ public class EmpleadoController {
         return empleado.orElse(null);
     }
 
+    // GET /empleados/buscar?nombre=María
+    @GetMapping("/buscar")
+    public List<Empleado> buscarPorNombre(@RequestParam String nombre) {
+        return repository.findAll().stream()
+                .filter(e -> e.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+                .collect(java.util.stream.Collectors.toList());
+    }
+
 
     // POST /empleados → crea un empleado nuevo
     @PostMapping //responde cuando alguien hace post a /empleados

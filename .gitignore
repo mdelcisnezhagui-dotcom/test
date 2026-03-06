@@ -42,7 +42,7 @@ target/
 *.iml
 
 # Variables de entorno con contraseñas
-application.properties
+src/main/resources/application.properties
 
 # Sistema operativo
 .DS_Store
