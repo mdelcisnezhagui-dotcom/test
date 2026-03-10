@@ -52,4 +52,18 @@ public class EmpleadoController {
     public void eliminarEmpleado(@PathVariable Long id) {
         repository.deleteById(id);
     }
+
+    //responde a peticiones put en /empleados/id
+    @PutMapping("/{id}")
+    public Empleado actualizarEmpleado(@PathVariable Long id, @RequestBody Empleado empleadoActualizado){
+            // permite buscar al empleado a modificar
+        return repository.findById(id).map(empleado -> {
+            empleado.setNombre(empleadoActualizado.getNombre());
+            empleado.setCargo(empleadoActualizado.getCargo());
+            empleado.setDepartamento(empleadoActualizado.getDepartamento());
+            //guarda los cambios en postgreSQL
+            return repository.save(empleado);
+        }).orElse(null);
+    }
+
 }
